@@ -1,4 +1,3 @@
-TimChoi
-phuocdaubo
-Chi dau trau CHI DAU TRAU
+TimChoi Application
 
+TimChoi using Google Maps for save and show your address to your friends.
