@@ -2,6 +2,9 @@
 
 use Facebook\FacebookSession;
 use Facebook\FacebookRedirectLoginHelper;
+use Facebook\FacebookRequest;
+use Facebook\GraphUser;
+use Facebook\FacebookRequestException;
 
 class Login extends CI_Controller {
     
@@ -20,7 +23,6 @@ class Login extends CI_Controller {
     
     public function index() {
         $helper = new FacebookRedirectLoginHelper('http://localhost/timchoi/index.php/login/');
-        
         try {
             $session = $helper->getSessionFromRedirect();
         } catch(FacebookRequestException $ex) {
@@ -40,5 +42,42 @@ class Login extends CI_Controller {
             $data['loginUrl'] = $helper->getLoginUrl();
             $this->load->view('login', $data);            
         }
+    }
+    
+    /*
+     * @Return: bool
+     */    
+    private function check_user_exist($session)
+    {
+        
+    }
+    
+    /*
+     * @Return: bool
+     */
+    private function register_user()
+    {
+        
+    }
+    
+    /*
+     * Call api to get user info
+     * @Return: object
+     */
+    private function get_user_info($session)
+    {
+        if ($session) {
+            try {
+                //*** Get user profile
+                $user_profile = (new FacebookRequest($session, 'GET', '/me'))
+                        ->execute()
+                        ->getGraphObject(GraphUser::className());
+                return $user_profile;
+            } catch (FacebookRequestException  $e) {
+                echo "Exception occured, code: " . $e->getCode();
+                echo " with message: " . $e->getMessage();           
+            }
+        }
+        return false;
     }
 }
