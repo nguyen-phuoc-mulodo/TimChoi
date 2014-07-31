@@ -32,8 +32,8 @@ use Facebook\GraphObject;
 class Welcome extends CI_Controller {
  
     //Configuramos facebook api y secret
-    private $fb_api = '1434077473539594';
-    private $fb_secret = '611a295e11aa82b1a47a9705858ecf40';
+    private $fb_api = '695082060564419';
+    private $fb_secret = '093b0b371673a8b831dcc87d62fee7b0';
      
     //Configuramos la url de redirect que redireccionara al metodo logueado de esta clase
     private $fb_redirect = 'index.php/login/logueado';
