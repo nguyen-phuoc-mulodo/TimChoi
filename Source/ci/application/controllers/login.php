@@ -35,7 +35,7 @@ class Login extends CI_Controller {
             
             //*** Set session for user
             $this->session->set_userdata('user_token',$session->getToken());
-            //redirect('home');
+            redirect('home');
             
         } else { // Not logged
             
