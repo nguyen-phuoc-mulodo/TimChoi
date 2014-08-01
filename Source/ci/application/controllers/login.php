@@ -17,7 +17,7 @@ class Login extends CI_Controller {
         
         //*** Check if user has logged
         if ($this->session->userdata('user_token')) {
-            //redirect('home');
+            redirect('home');
         }
     }
     

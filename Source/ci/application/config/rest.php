@@ -84,7 +84,8 @@ $config['rest_realm'] = 'REST API';
 |	'session' = check for PHP session variable. Set variable name below.
 |
 */
-$config['rest_auth'] = false;
+//$config['rest_auth'] = false;
+$config['rest_auth'] = 'session';
 
 /*
 |--------------------------------------------------------------------------
@@ -99,7 +100,7 @@ $config['rest_auth'] = false;
 */
 
 //change this to '' for wildcard unit test
-$config['auth_source'] = 'ldap';
+$config['auth_source'] = 'user_token';
 
 /*
 |--------------------------------------------------------------------------
