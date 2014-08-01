@@ -10,6 +10,6 @@ class Home extends GB_Controller {
     
     public function index()
     {
-        echo 'Welcome to Tim Choi!<br/>';
+        $this->load->view('home');
     }
 }
