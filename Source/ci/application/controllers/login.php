@@ -37,13 +37,12 @@ class Login extends CI_Controller {
             $this->session->set_userdata('user_token',$session->getToken());
             
             //***
-            $user = $this->get_user_info($session);
-            echo "<pre>";
-            print_r($user);
-            exit;
             
             //*** Redirect to home
             redirect('home');
+
+            
+            
             
         } else { // Not logged
             
