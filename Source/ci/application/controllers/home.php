@@ -13,3 +13,14 @@ class Home extends GB_Controller {
         $this->load->view('home');
     }
 }
+
+/*
+Table places
+- Tendiadiem nvarchar
+- Mota nvarchar
+- Toado: lat & long.
+	+ lat : double
+	+ long: double
+- id user int
+
+*/
