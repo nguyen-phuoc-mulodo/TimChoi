@@ -10,6 +10,9 @@ class Home extends GB_Controller {
     
     public function index()
     {
+    	//User_id
+    	//thong tin nguoig su dung,
+    	//daffafaf
         $this->load->view('home');
     }
 }
@@ -22,5 +25,4 @@ Table places
 	+ lat : double
 	+ long: double
 - id user int
-
 */
