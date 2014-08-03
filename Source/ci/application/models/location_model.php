@@ -10,8 +10,9 @@ class Location_model extends CI_Model {
 	
 	// check location if exist 
 	// @return bool
+
 	public function check_exist(){
-		this->db->select("lat,long");
+		$this->db->select("*");
 		$this->db->from("location");
 		$arr=array('lat'=>$data['lat'],
 					'long'=>$data['long']);
@@ -28,11 +29,9 @@ class Location_model extends CI_Model {
 	// insert location
 	// @return bool
 	public function add($data){
-		//check if exist in location
-		if( $this->check_exist()==false){
-			$this->db->insert('location',$data);
-				return true;
-		}
-		return false;
+		if($this->db->insert('location',$data)){
+			return true;
+		} else
+			return false;
 	}
 }
