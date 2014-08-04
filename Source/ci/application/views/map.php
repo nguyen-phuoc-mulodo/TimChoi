@@ -19,12 +19,14 @@
     <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBv9IFrWTglCipymEeeFdC5d3epqmFJk5M">
     </script>   
 
+    <script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
+
     <script>
         function initialize() {
             var locations = <?php echo $locations_json; ?>;
 
             var mapOptions = {
-                zoom: 15
+                zoom: 16
             };
 
             // show all location on map
@@ -44,6 +46,10 @@
                 var long = position.coords.longitude;
                 var geolocate = new google.maps.LatLng(lat, long);
 
+                //
+                $('.geolocate').find('a').attr('data-lat', lat);
+                $('.geolocate').find('a').attr('data-long', long);
+
                 map.setCenter(geolocate);
 
                 // marker 
@@ -57,6 +63,21 @@
 
         google.maps.event.addDomListener(window, 'load', initialize);
     </script>
+
+    <script>
+        $(document).ready(function () {
+            var a = $('.list-location').find('a');
+            a.click(function() {
+                var lat = $(this).attr('data-lat');
+                var long = $(this).attr('data-long');
+                var location = new google.maps.LatLng(lat, long);
+
+                map.setCenter(location);
+
+                return false;
+            });
+        });
+    </script>
     
 </head>
 
@@ -64,8 +85,24 @@
     
     <div id="wrapper">
         <div id="map-canvas">
-            
-        </div>
+        </div><!-- end #map-canvas -->
+
+        <div id="sidebar">
+            <div class="sidebar-inner">
+                <ol class="list-location">
+                    <li class="geolocate"><a href="#" data-lat="" data-long="">Vị trí của bạn</a></li>
+                    <?php foreach ($locations as $location) {
+                       ?>
+                       <li>
+                            <a href="#" data-lat="<?php echo $location['lat']; ?>" data-long="<?php echo $location['long']; ?>"><?php echo $location['name'] ?></a>
+                            <small><?php echo $location['lat'] . ', ' . $location['long']; ?></small>
+                       </li>
+                       <?php
+                    } ?>
+                </ol>
+            </div>
+        </div><!-- end #side-bar -->
+
     </div>
 
 </body>

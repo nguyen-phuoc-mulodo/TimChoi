@@ -1,8 +1,72 @@
+@import url(http://fonts.googleapis.com/css?family=Roboto:400,700,400italic,700italic&subset=latin,vietnamese);
+
+* {margin: 0; padding: 0}
+
 a {
     width: 100%;
+}
+
+body {
+	font-size: 14px;
+	font-family: 'Roboto', sans-serif;
 }
 
 html, body, #wrapper, #map-canvas {
 	height: 100%;
 	margin: 0; padding: 0;
+}
+
+#map-canvas {
+	width: calc(100% - 300px);
+}
+
+/* Remove Google map logo and it's stuff */
+a[href^="http://maps.google.com/maps"]{display:none !important}
+
+.gmnoprint a, .gmnoprint span {
+    display:none;
+}
+.gmnoprint div {
+    background:none !important;
+}
+
+
+#sidebar {
+	position: fixed;
+	top: 0; right: 0;
+	width: 300px; height: 100%;
+	background: white;
+}
+
+.sidebar-inner {
+	padding: 20px;
+}
+
+.list-location {
+	list-style: none;
+}
+
+.list-location li {
+	margin-bottom: 10px;
+}
+
+.list-location small {
+	display: block;
+	font-style: italic;	
+}
+
+.geolocate a {
+	background: #4787f2;
+	color: white;
+	padding: 6px 10px;
+	border-radius: 3px;
+	font-weight: 700;
+	margin-bottom: 15px;
+	display: inline-block;
+	text-align: center;
+}
+
+.geolocate a:hover {
+	text-decoration: none;
+	background: #3E77D7;	
 }

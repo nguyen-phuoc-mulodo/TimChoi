@@ -14,6 +14,7 @@
 			$locations_json =  json_encode($locations); //Create json from array
 
 			$data['locations_json'] = $locations_json; //Initializing view data
+			$data['locations'] = $locations;
 
 			$this->load->view('map', $data);
 		}

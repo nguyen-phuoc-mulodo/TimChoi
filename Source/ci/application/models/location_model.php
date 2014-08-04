@@ -39,8 +39,8 @@ class Location_model extends CI_Model {
 	// @return array
 	public function get_locations() {
 		$query = $this->db->get("location");
-		$res = $query->result();
+		$res = $query->result_array();
 
-		return $res;
+		return $res;	
 	}
 }
