@@ -23,13 +23,11 @@
         function initialize() {
             var locations = <?php echo $locations_json; ?>;
 
-            var myLatLng = new google.maps.LatLng(locations[2].lat, locations[2].long);
-
             var mapOptions = {
-                zoom: 15,
-                center: myLatLng
-            }
+                zoom: 15
+            };
 
+            // show all location on map
             map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
 
             for(var i = 0; i < locations.length; i++) {
@@ -40,7 +38,21 @@
                 });
             }
 
-            //marker.setMap(map);
+            // get your current location using HTML5 Geolocation
+            navigator.geolocation.getCurrentPosition(function(position) {
+                var lat = position.coords.latitude;
+                var long = position.coords.longitude;
+                var geolocate = new google.maps.LatLng(lat, long);
+
+                map.setCenter(geolocate);
+
+                // marker 
+                var market = new google.maps.Marker ({
+                    position: geolocate,
+                    map: map,
+                    title: "You are here"
+                });
+            });
         }
 
         google.maps.event.addDomListener(window, 'load', initialize);
