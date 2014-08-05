@@ -8,15 +8,15 @@
 		}
 
 		public function index() {
-			$this->load->model('Location_model'); //Load model
-			$locations = $this->Location_model->get_locations(); //Get all locations
+                    $this->load->model('Location_model'); //Load model
+                    $locations = $this->Location_model->get_locations(); //Get all locations
 
-			$locations_json =  json_encode($locations); //Create json from array
+                    $locations_json =  json_encode($locations); //Create json from array
 
-			$data['locations_json'] = $locations_json; //Initializing view data
-			$data['locations'] = $locations;
+                    $data['locations_json'] = $locations_json; //Initializing view data
+                    $data['locations'] = $locations;
 
-			$this->load->view('map', $data);
+                    $this->load->view('map', $data);
 		}
 	}
 ?>
