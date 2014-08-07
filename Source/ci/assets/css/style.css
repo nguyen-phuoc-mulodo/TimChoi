@@ -1,5 +1,4 @@
-@import url(http://fonts.googleapis.com/css?family=Roboto:400,700,400italic,700italic&subset=latin,vietnamese);
-
+@import url(http://fonts.googleapis.com/css?family=Roboto:400,700,400italic,700italic&subset=latin,latin-ext,vietnamese);
 * {margin: 0; padding: 0}
 
 a {
@@ -69,4 +68,17 @@ a[href^="http://maps.google.com/maps"]{display:none !important}
 .geolocate a:hover {
 	text-decoration: none;
 	background: #3E77D7;	
+}
+
+/* search box */
+#search-box {
+	position: absolute;
+	top: 20px; left: 120px;
+}
+
+#search-box input {
+	width: 420px;
+	border: none;
+	padding: 6px 10px;
+	border-radius: 3px
 }

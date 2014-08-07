@@ -16,7 +16,7 @@
     <!-- Custom CSS -->
     <link href="<?php echo base_url(); ?>assets/css/style.css" rel="stylesheet">   
 
-    <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBv9IFrWTglCipymEeeFdC5d3epqmFJk5M">
+    <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBv9IFrWTglCipymEeeFdC5d3epqmFJk5M&libraries=places">
     </script>   
 
     <script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
@@ -92,10 +92,14 @@
                         title: "You are here"
                     });
                 });
+
+                // search box
+                var input = document.getElementById('pac-input');
+                var searchBox = new google.maps.places.SearchBox(input);
             }
 
             google.maps.event.addDomListener(window, 'load', initialize(locations));
-            
+               
             });
     </script>
 
@@ -121,6 +125,10 @@
     <div id="wrapper">
         <div id="map-canvas">
         </div><!-- end #map-canvas -->
+        
+        <div id="search-box">
+            <input type="text" id="pac-input" class="controls" placeholder="Search Box" />
+        </div><!-- end search-box -->
 
         <div id="sidebar">
             <div class="sidebar-inner">
