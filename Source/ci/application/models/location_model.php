@@ -34,6 +34,7 @@ class Location_model extends CI_Model {
 		} else
 			return false;
 	}
+<<<<<<< HEAD
 	// delete location
 	// @return bool
 	public function remove($id){
@@ -49,5 +50,15 @@ class Location_model extends CI_Model {
 		$query=$this->db->get('location');
 		$arr=$query->result_array();
 		return $arr;
+=======
+
+	// select location
+	// @return array
+	public function get_locations() {
+		$query = $this->db->get("location");
+		$res = $query->result_array();
+
+		return $res;	
+>>>>>>> 167431c2381fc460ae2ccb05ae4ce6145be4450c
 	}
 }
