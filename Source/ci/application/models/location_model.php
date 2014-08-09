@@ -34,4 +34,20 @@ class Location_model extends CI_Model {
 		} else
 			return false;
 	}
+	// delete location
+	// @return bool
+	public function remove($id){
+		$this->db->where("id",$id);
+		if($this->db->delete('location')){
+			return true;
+		} else {
+			return false;
+		}
+	}
+	// view all location
+	public function view_locations(){
+		$query=$this->db->get('location');
+		$arr=$query->result_array();
+		return $arr;
+	}
 }
