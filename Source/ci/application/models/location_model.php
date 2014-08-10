@@ -50,13 +50,12 @@ class Location_model extends CI_Model {
 		$query=$this->db->get('location');
 		$arr=$query->result_array();
 		return $arr;
-
+        }
 	// select location
 	// @return array
 	public function get_locations() {
 		$query = $this->db->get("location");
 		$res = $query->result_array();
-
 		return $res;	
 	}
 }
