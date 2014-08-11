@@ -10,6 +10,10 @@ class Login extends CI_Controller {
     
     public function __construct() {
         parent::__construct();
+        
+        //*** Load model
+        $this->load->model('user_model');
+        
         session_start();
         
         //*** Initializing facebook app
@@ -31,18 +35,25 @@ class Login extends CI_Controller {
             // When validation fails or other local issues
         }
         
-        if (isset($session)) { // Login successful
+        if (isset($session) && $session->validate()) { // Login successful
             
             //*** Set session for user
             $this->session->set_userdata('user_token',$session->getToken());
             
-            //***
+            //*** Call api to get user info
+            $request = new FacebookRequest($session, 'GET', '/me');
+            $response = $request->execute();
+            $user = $response->getGraphObject(GraphUser::className());
+            
+            if ( !$this->check_user_exist($user->getId())) {
+                // Register user
+                if ($this->register_user($user)) {
+                    // Register susseccfully
+                }
+            }
             
             //*** Redirect to home
-            redirect('home');
-
-            
-            
+            redirect('map');
             
         } else { // Not logged
             
@@ -54,17 +65,20 @@ class Login extends CI_Controller {
     /*
      * @Return: bool
      */    
-    private function check_user_exist($session)
+    private function check_user_exist($fb_id)
     {
-        
+        //*** check exist in DB
+        return $this->user_model->check_exist($fb_id);
     }
     
     /*
+     * @Param: 
+     *  -user : GraphUser
      * @Return: bool
      */
-    private function register_user()
+    private function register_user($user)
     {
-        
+        return $this->user_model->process_create_user($user);
     }
     
     /*

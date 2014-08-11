@@ -22,7 +22,7 @@
     <script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
 
     <script>
-        var locationAPI = "http://localhost/timchoi/index.php/api/location/loca";
+        var locationAPI = "/timchoi/index.php/api/location/loca";
 
         $.getJSON( locationAPI, {
             format: "json"

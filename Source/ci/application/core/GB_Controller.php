@@ -23,4 +23,12 @@ class GB_Controller extends CI_Controller
         }
     }
 
+    /*
+     * Write log when there is an error
+     */
+    public function log()
+    {
+        
+    }
+
 }
