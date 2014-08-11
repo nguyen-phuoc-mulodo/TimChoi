@@ -78,25 +78,22 @@ class User extends GB_Controller {
             $id=$this->uri->segment(3);
         }
 
-         $this->load->library('form_validation');
-         $this->form_validation->set_rules('id','id location','required');
+        $this->load->library('form_validation');
+        $this->form_validation->set_rules('id','id location','required');
 
-         if($this->form_validation->run()==FALSE){
-            //load lại cái view
-         } else{
-            // xóa nội dung
-            $this->load->model('Location_model');
-            if($this->Location_model->remove()){
-                redirect('users/list');
-            }
-         }
+        $this->load->model('Location_model');
+        if($this->Location_model->remove($id)){
+            redirect('user/view_all_location');
+        } else {
+            echo " whoop! error delete location";
+        }
     }
     //@ show all location
     public function view_all_location(){
         $this->load->helper('url');
         $this->load->helper('form');
         $this->load->model('Location_model');
-        $data=$this->Location_model->view_locations();
+        $data['data']=$this->Location_model->view_locations();
         $this->load->view('view_all_locations',$data);
     }
 }
