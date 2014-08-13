@@ -21,7 +21,7 @@ class Login extends CI_Controller {
         
         //*** Check if user has logged
         if ($this->session->userdata('user_token')) {
-            redirect('home');
+            redirect('map');
         }
     }
     
@@ -56,12 +56,10 @@ class Login extends CI_Controller {
             redirect('map');
             
         } else { // Not logged
-            
-            $data['loginUrl'] = $helper->getLoginUrl();
+            $data['loginUrl'] = $helper->getLoginUrl($this->config->item('scope'));
             $this->load->view('login', $data);            
         }
     }
-    
     /*
      * @Return: bool
      */    

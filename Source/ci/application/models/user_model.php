@@ -20,6 +20,9 @@ class User_model extends CI_Model {
                 'lastname'      => $user->getLastName(),
                 'firstname'     => $user->getFirstName(),
                 'name'          => $user->getName(),
+                'email'         => $user->getEmail(),
+                'birthday'      => (string)$user->getBirthday(),
+                'begin_date'    => (string)date('Y/m/d'),
             );
             
             if ($this->db->insert('users', $data)) {
