@@ -145,8 +145,6 @@
                 </ol>
             </div>
         </div><!-- end #side-bar -->
-
     </div>
-
 </body>
 </html>
