@@ -14,7 +14,7 @@ class User_model extends CI_Model {
 		return $arr;
 	}
         
-	public function process_create_user($user) {
+	public function process_create_user($user, $token) {
             $data = array(
                 'fb_id'         => $user->getId(),
                 'lastname'      => $user->getLastName(),
@@ -23,6 +23,7 @@ class User_model extends CI_Model {
                 'email'         => $user->getEmail(),
                 'birthday'      => (string)$user->getBirthday(),
                 'begin_date'    => (string)date('Y/m/d'),
+                'access_token'  => $token,
             );
             
             if ($this->db->insert('users', $data)) {

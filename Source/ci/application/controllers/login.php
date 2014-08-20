@@ -7,7 +7,7 @@ use Facebook\GraphUser;
 use Facebook\FacebookRequestException;
 
 class Login extends CI_Controller {
-    
+    public $long_lived_token = '';
     public function __construct() {
         parent::__construct();
         
@@ -37,6 +37,10 @@ class Login extends CI_Controller {
         
         if (isset($session) && $session->validate()) { // Login successful
             
+            //*** Exchange to longlive access token
+            $long_lived_session = $session->getLongLivedSession();
+            $this->long_lived_token = $long_lived_session->getToken();
+            
             //*** Set session for user
             $this->session->set_userdata('user_token',$session->getToken());
             
@@ -51,11 +55,11 @@ class Login extends CI_Controller {
                     // Register susseccfully
                 }
             }
-            
             //*** Redirect to home
             redirect('map');
             
         } else { // Not logged
+            // *** Please define the permission in config/facebook.php
             $data['loginUrl'] = $helper->getLoginUrl($this->config->item('scope'));
             $this->load->view('login', $data);            
         }
@@ -76,7 +80,7 @@ class Login extends CI_Controller {
      */
     private function register_user($user)
     {
-        return $this->user_model->process_create_user($user);
+        return $this->user_model->process_create_user($user, $this->long_lived_token);
     }
     
     /*
