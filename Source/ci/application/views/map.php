@@ -14,11 +14,13 @@
     <link href="<?php echo base_url(); ?>assets/css/sb-admin.css" rel="stylesheet">
     
     <!-- Custom CSS -->
+    <link rel="stylesheet" href="<?php echo base_url(); ?>assets/css/reset.css ?>">
     <link href="<?php echo base_url(); ?>assets/css/style.css" rel="stylesheet">   
 
     <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBv9IFrWTglCipymEeeFdC5d3epqmFJk5M&libraries=places">
     </script>   
-
+    
+    <script src="<?php echo base_url(); ?>assets/js/infobox.js"></script>
     <script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
 
     <script>
@@ -39,37 +41,65 @@
 
                 // infowindow
                 var infowindow = new google.maps.InfoWindow();
-
+                var imgLink = '<?php echo base_url() . "/uploads/"; ?>';
                 for(var i = 0; i < locations.length; i++) {
-                    // infowindow
-                    var contentString = '<div id="content">'+
-                      '<div id="siteNotice">'+
-                      '</div>'+
-                      '<h1 id="firstHeading" class="firstHeading">'+locations[i].name+'</h1>'+
-                      '<div id="bodyContent">'+
-                      '<p>'+locations[i].description+'</p>'+
-                      '</div>'+
+                    //infowindow
+                    var contentString ='<div id="infoWindowWrapper">'+
+                                '<figure>'+ 
+                                    '<img src="'+imgLink+locations[i].image+'">'+
+                                '</figure>'+
+                                '<div id="bodyContent">'+
+                                    '<h1 id="firstHeading" class="firstHeading">'+locations[i].name+'</h1>'+
+                                    '<p>'+locations[i].description+'</p>'+
+                                '</div>'+
+                          
                       '</div>';
+
+                    // infoWindow = new google.maps.InfoWindow();
+                    // var windowLatLng = new google.maps.LatLng(locations[i].lat, locations[i].long);
+                    // infoWindow.setOptions({
+                    //     content: contentString,
+                    //     position: windowLatLng,
+                    // });
+                    // infoWindow.open(map); 
+
+                    // var windowLatLng = new google.maps.LatLng(locations[i].lat, locations[i].long);
+                    // var infobox = new InfoBox({
+                    //     content: contentString,
+                    //     position: windowLatLng
+                    // });
+
+                    // infobox.open(map);
+                     var flagIcon_shadow = new google.maps.MarkerImage("http://googlemaps.googlermania.com/img/marker_shadow.png");
+                    flagIcon_shadow.size = new google.maps.Size(35, 35);
+                    flagIcon_shadow.anchor = new google.maps.Point(0, 35);
+
+                    var icon = {
+                        url: "<?php echo base_url() . '/uploads/'; ?>" + locations[i].image+"?type=imgMarker",
+                        scaledSize: new google.maps.Size(70, 70),
+                        origin: new google.maps.Point(0,0), //origin
+                        anchor: new google.maps.Point(0, 0) //anchor
+                    }
 
                     var marker = new google.maps.Marker ({
                         position: new google.maps.LatLng(locations[i].lat, locations[i].long),
                         map: map,
-                        icon: "<?php echo base_url() . 'assets/images/dark-marker.png'; ?>",
                         title: locations[i].name,
-                        info: contentString
+                        info: contentString,
+                        icon: icon
                     });
 
                    
 
-                    // handle click event
-                    google.maps.event.addListener(marker, 'click', function() {
-                        infowindow.setContent(this.info);
-                        infowindow.open(map, this);
+                    // // handle click event   
+                    // google.maps.event.addListener(marker, 'click', function() {
+                    //     infowindow.setContent(this.info);
+                    //     infowindow.open(map, this);
 
-                        // zoom map
-                        //map.setZoom(15);
-                        //map.setCenter(this.getPosition());
-                    });
+                    //     // zoom map
+                    //     //map.setZoom(15);
+                    //     //map.setCenter(this.getPosition());
+                    // });
                 }
 
                 // get your current location using HTML5 Geolocation

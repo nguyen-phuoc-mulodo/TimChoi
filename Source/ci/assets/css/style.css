@@ -57,7 +57,7 @@ a[href^="http://maps.google.com/maps"]{display:none !important}
 .geolocate a {
 	background: #4787f2;
 	color: white;
-	padding: 6px 10px;
+	padding: 12px 10px;
 	border-radius: 3px;
 	font-weight: 700;
 	margin-bottom: 15px;
@@ -80,5 +80,49 @@ a[href^="http://maps.google.com/maps"]{display:none !important}
 	width: 420px;
 	border: none;
 	padding: 6px 10px;
-	border-radius: 3px
+	border-radius: 3px;
+	line-height: 19px;
 }
+
+#infoWindowWrapper {
+	/*padding: 10px;
+	width: 250px;
+	background: #252525;
+	color: white;
+	border-radius: 45px;
+	overflow: hidden;
+	box-shadow: 1px 1px 0px black, 2px 2px 0px black, 3px 3px 0px black;*/
+}
+
+#firstHeading {
+	font-size: 18px;
+	margin-bottom: 10px;
+}
+
+#bodyContent {
+	display: none;
+}
+
+figure {
+	width: 74px;
+	height: 88px;
+	float: left;
+	margin-right: 15px;
+	position: relative;
+	background: url('../images/marker.png') no-repeat center center;
+}
+
+figure img {
+	border-radius: 50%;
+	max-width: 100%;
+	height: auto;
+	position: absolute;
+	width: 66px;
+	height: 66px;
+	top: 4px; left: 4px;
+}
+
+img[src*="uploads"]{
+  border-radius: 100%;
+  display: none;
+}    
