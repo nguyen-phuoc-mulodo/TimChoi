@@ -117,8 +117,4 @@ class GraphUser extends GraphObject
     return $this->getProperty('location', GraphLocation::className());
   }
 
-    public function getEmail()
-  {
-    return $this->getProperty('email');
-  }
 }
