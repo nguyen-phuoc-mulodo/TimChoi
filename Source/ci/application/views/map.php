@@ -162,6 +162,9 @@
 
         <div id="sidebar">
             <div class="sidebar-inner">
+                <div class="user">
+                    <p><img src="<?php echo $img_url ?>" alt="" class="img-circle user-avatar" /></p>
+                </div>
                 <ol class="list-location">
                     <li class="geolocate"><a href="#" data-lat="" data-long="">Vị trí của bạn</a></li>
                     <?php foreach ($locations as $location) {

@@ -21,9 +21,10 @@ class User_model extends CI_Model {
                 'firstname'     => $user->getFirstName(),
                 'name'          => $user->getName(),
                 'email'         => $user->getEmail(),
-                'birthday'      => (string)$user->getBirthday(),
-                'begin_date'    => (string)date('Y/m/d'),
+//                'birthday'      => (string)$user->getBirthday(),
+//                'begin_date'    => (string)date('Y/m/d'),
                 'access_token'  => $token,
+                'avatar'        => $this->facebook->get_user_avatar($this->session->userdata('user_token')),
             );
             
             if ($this->db->insert('users', $data)) {
@@ -39,5 +40,9 @@ class User_model extends CI_Model {
                 return FALSE;
             }
             return TRUE;
+        }
+        
+        public function test() { 
+            return $this->facebook->get_user_avatar($this->session->userdata('user_token'));
         }
 }

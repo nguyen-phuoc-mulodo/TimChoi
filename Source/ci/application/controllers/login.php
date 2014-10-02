@@ -10,7 +10,7 @@ class Login extends CI_Controller {
     public $long_lived_token = '';
     public function __construct() {
         parent::__construct();
-        
+        $this->load->library('facebook');
         //*** Load model
         $this->load->model('user_model');
         

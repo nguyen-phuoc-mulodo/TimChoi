@@ -1,6 +1,7 @@
 @import url(http://fonts.googleapis.com/css?family=Roboto:400,700,400italic,700italic&subset=latin,latin-ext,vietnamese);
 * {margin: 0; padding: 0}
 
+
 a {
     width: 100%;
 }
@@ -35,6 +36,7 @@ a[href^="http://maps.google.com/maps"]{display:none !important}
 	top: 0; right: 0;
 	width: 300px; height: 100%;
 	background: white;
+        border: 1px solid #b0b0b0;
 }
 
 .sidebar-inner {
@@ -125,4 +127,8 @@ figure img {
 img[src*="uploads"]{
   border-radius: 100%;
   display: none;
-}    
+}
+
+.user-avatar {
+    margin: 0 0 0 75px;
+}

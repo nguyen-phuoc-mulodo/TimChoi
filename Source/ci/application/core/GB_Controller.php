@@ -13,6 +13,8 @@ class GB_Controller extends CI_Controller
 {
     public function __construct() {
         parent::__construct();
+        $this->load->library('facebook');
+        
         session_start();
         
         //*** Initializing facebook app
