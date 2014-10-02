@@ -1,7 +1,6 @@
 @import url(http://fonts.googleapis.com/css?family=Roboto:400,700,400italic,700italic&subset=latin,latin-ext,vietnamese);
 * {margin: 0; padding: 0}
 
-
 a {
     width: 100%;
 }
@@ -36,7 +35,6 @@ a[href^="http://maps.google.com/maps"]{display:none !important}
 	top: 0; right: 0;
 	width: 300px; height: 100%;
 	background: white;
-        border: 1px solid #b0b0b0;
 }
 
 .sidebar-inner {
@@ -105,16 +103,15 @@ a[href^="http://maps.google.com/maps"]{display:none !important}
 	display: none;
 }
 
-figure {
+.marker-figure {
 	width: 74px;
 	height: 88px;
 	float: left;
-	margin-right: 15px;
 	position: relative;
 	background: url('../images/marker.png') no-repeat center center;
 }
 
-figure img {
+.marker-figure img {
 	border-radius: 50%;
 	max-width: 100%;
 	height: auto;
@@ -124,9 +121,31 @@ figure img {
 	top: 4px; left: 4px;
 }
 
-img[src*="uploads"]{
-  border-radius: 100%;
-  display: none;
+.marker-hover {
+	background: #252525;
+	color: white;
+	width: 250px;
+	height: 74px;
+	border-radius: 50px;
+	box-sizing: border-box;
+	padding: 8px 20px 8px 80px;
+
+	visibility: hidden;
+	opacity: 0;
+
+	-webkit-transition: all .3s ease-in-out;
+	-o-transition: all .3s ease-in-out;
+	transition: all .3s ease-in-out;
+}
+
+.marker-hover .title {
+	font-size: 18px;
+	margin: 0;
+}
+
+.marker-hover.active {
+	visibility: visible;
+	opacity: 1;
 }
 
 .user-avatar {

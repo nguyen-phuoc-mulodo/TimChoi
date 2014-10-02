@@ -14,7 +14,6 @@
     <link href="<?php echo base_url(); ?>assets/css/sb-admin.css" rel="stylesheet">
     
     <!-- Custom CSS -->
-    <link rel="stylesheet" href="<?php echo base_url(); ?>assets/css/reset.css ?>">
     <link href="<?php echo base_url(); ?>assets/css/style.css" rel="stylesheet">   
 
     <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBv9IFrWTglCipymEeeFdC5d3epqmFJk5M&libraries=places">
@@ -39,69 +38,62 @@
                 // show all location on map
                 map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
 
-                // infowindow
-                var infowindow = new google.maps.InfoWindow();
-                var imgLink = '<?php echo base_url() . "/uploads/"; ?>';
-                for(var i = 0; i < locations.length; i++) {
-                    //infowindow
-                    var contentString ='<div id="infoWindowWrapper">'+
-                                '<figure>'+ 
-                                    '<img src="'+imgLink+locations[i].image+'">'+
-                                '</figure>'+
-                                '<div id="bodyContent">'+
-                                    '<h1 id="firstHeading" class="firstHeading">'+locations[i].name+'</h1>'+
-                                    '<p>'+locations[i].description+'</p>'+
-                                '</div>'+
-                          
-                      '</div>';
+                var imgLink = '<?php echo base_url() . "/uploads/"; ?>';         
 
-                    // infoWindow = new google.maps.InfoWindow();
-                    // var windowLatLng = new google.maps.LatLng(locations[i].lat, locations[i].long);
-                    // infoWindow.setOptions({
-                    //     content: contentString,
-                    //     position: windowLatLng,
-                    // });
-                    // infoWindow.open(map); 
+                var overlay = new google.maps.OverlayView();
+                
+                
+                    overlay.onAdd = function() {
+                        var panes = this.getPanes();
+                        this.panes_ = panes;
+                        for (var i = 0; i < locations.length; i++) {               
+                            //Create 'div' container with class 'marker'
+                            var div = document.createElement('div');
 
-                    // var windowLatLng = new google.maps.LatLng(locations[i].lat, locations[i].long);
-                    // var infobox = new InfoBox({
-                    //     content: contentString,
-                    //     position: windowLatLng
-                    // });
+                            //Add style to div
+                            div.style.position = "absolute";
 
-                    // infobox.open(map);
-                     var flagIcon_shadow = new google.maps.MarkerImage("http://googlemaps.googlermania.com/img/marker_shadow.png");
-                    flagIcon_shadow.size = new google.maps.Size(35, 35);
-                    flagIcon_shadow.anchor = new google.maps.Point(0, 35);
+                            //Add class marker to style in CSS
+                            div.className = "marker";
 
-                    var icon = {
-                        url: "<?php echo base_url() . '/uploads/'; ?>" + locations[i].image+"?type=imgMarker",
-                        scaledSize: new google.maps.Size(70, 70),
-                        origin: new google.maps.Point(0,0), //origin
-                        anchor: new google.maps.Point(0, 0) //anchor
+                            //Add div content
+                            div.innerHTML = '<figure class="marker-figure">'+
+                                                '<img src="'+imgLink+locations[i].image+'">'+
+                                            '</figure>'+
+                                            '<section class="marker-hover">'+
+                                                '<h2 class="title">'+locations[i].name+'</h2>'+
+                                                '<p class="description" >'+locations[i].description+'</p>'+
+                                            '</section>';
+
+                            //Add div to pane
+                            this.div_ = div;
+                            
+                            panes.floatPane.appendChild(this.div_);
+                        };
+
                     }
+                    overlay.draw = function() {
+                        var latlng;
+                        for (var i = 0; i < locations.length; i++) {  
+                            latlng = new google.maps.LatLng(locations[i].lat, locations[i].long);
+                            var point = this.getProjection().fromLatLngToDivPixel(latlng);
+                            var div = this.panes_.floatPane.getElementsByTagName('div')[i];
 
-                    var marker = new google.maps.Marker ({
-                        position: new google.maps.LatLng(locations[i].lat, locations[i].long),
-                        map: map,
-                        title: locations[i].name,
-                        info: contentString,
-                        icon: icon
-                    });
+                            if(div.className == 'marker') {
+                                div.style.left = (point.x - 37) + 'px';
+                                div.style.top = (point.y - 88) + 'px';
+                            }
+                        }
+                        
+                    }
+                    overlay.onRemove = function() {
+                        this.div_.parentNode.removeChild(this.div_);
+                    }
+                
+                
+                overlay.setMap(map);
 
-                   
-
-                    // // handle click event   
-                    // google.maps.event.addListener(marker, 'click', function() {
-                    //     infowindow.setContent(this.info);
-                    //     infowindow.open(map, this);
-
-                    //     // zoom map
-                    //     //map.setZoom(15);
-                    //     //map.setCenter(this.getPosition());
-                    // });
-                }
-
+                
                 // get your current location using HTML5 Geolocation
                 navigator.geolocation.getCurrentPosition(function(position) {
                     var lat = position.coords.latitude;
@@ -145,6 +137,18 @@
 
                 return false;
             });
+
+
+            // $('.marker-figure').hover(function() {
+            //     $(this).next('.marker-hover').addClass("active");
+            // }, function() {
+            //     $(this).next('.marker-hover').removeClass("active");
+            // });
+
+            $('#map-canvas').delegate(".marker-figure", "click", function() {
+                $(this).next('.marker-hover').addClass("active");
+                $(this).css({'z-index' : 2});
+            }); 
         });
     </script>
     
@@ -164,14 +168,14 @@
             <div class="sidebar-inner">
                 <div class="user">
                     <p><img src="<?php echo $img_url ?>" alt="" class="img-circle user-avatar" /></p>
-                </div>
+                </div>                
                 <ol class="list-location">
                     <li class="geolocate"><a href="#" data-lat="" data-long="">Vị trí của bạn</a></li>
                     <?php foreach ($locations as $location) {
                        ?>
                        <li>
                             <a href="#" data-lat="<?php echo $location['lat']; ?>" data-long="<?php echo $location['long']; ?>"><?php echo $location['name'] ?></a>
-                            <small><?php echo $location['lat'] . ', ' . $location['long']; ?></small>
+                            <small><?php echo $location['description'] ?></small>
                        </li>
                        <?php
                     } ?>
