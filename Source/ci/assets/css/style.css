@@ -122,7 +122,6 @@ figure img {
 	top: 4px; left: 4px;
 }
 
-img[src*="uploads"]{
-  border-radius: 100%;
-  display: none;
-}    
+img[src*="close.gif"] {
+	display: none;
+}
