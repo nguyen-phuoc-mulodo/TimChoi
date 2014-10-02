@@ -38,6 +38,7 @@
                 // show all location on map
                 map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
 
+<<<<<<< HEAD
                 var imgLink = '<?php echo base_url() . "/uploads/"; ?>';         
 
                 var overlay = new google.maps.OverlayView();
@@ -92,6 +93,70 @@
                 
                 
                 overlay.setMap(map);
+=======
+                // infowindow
+                var infowindow = new google.maps.InfoWindow();
+                var imgLink = '<?php echo base_url() . "/uploads/"; ?>';
+                for(var i = 0; i < locations.length; i++) {
+                    //infowindow
+                    var contentString ='<div id="infoWindowWrapper">'+
+                                '<figure>'+ 
+                                    '<img src="'+imgLink+locations[i].image+'">'+
+                                '</figure>'+
+                                '<div id="bodyContent">'+
+                                    '<h1 id="firstHeading" class="firstHeading">'+locations[i].name+'</h1>'+
+                                    '<p>'+locations[i].description+'</p>'+
+                                '</div>'+
+                          
+                      '</div>';
+
+                    infoWindow = new google.maps.InfoWindow();
+                    var windowLatLng = new google.maps.LatLng(locations[i].lat, locations[i].long);
+                    infoWindow.setOptions({
+                        content: contentString,
+                        position: windowLatLng,
+                    });
+                    infoWindow.open(map); 
+
+                    // var windowLatLng = new google.maps.LatLng(locations[i].lat, locations[i].long);
+                    // var infobox = new InfoBox({
+                    //     content: contentString,
+                    //     position: windowLatLng
+                    // });
+
+                    //  infobox.open(map);
+                    //  var flagIcon_shadow = new google.maps.MarkerImage("http://googlemaps.googlermania.com/img/marker_shadow.png");
+                    // flagIcon_shadow.size = new google.maps.Size(35, 35);
+                    // flagIcon_shadow.anchor = new google.maps.Point(0, 35);
+
+                    var icon = {
+                        url: "<?php echo base_url() . '/uploads/'; ?>" + locations[i].image+"?type=imgMarker",
+                        scaledSize: new google.maps.Size(70, 70),
+                        origin: new google.maps.Point(0,0), //origin
+                        anchor: new google.maps.Point(0, 0) //anchor
+                    }
+
+                    var marker = new google.maps.Marker ({
+                        position: new google.maps.LatLng(locations[i].lat, locations[i].long),
+                        map: map,
+                        title: locations[i].name,
+                        info: contentString,
+                        icon: icon
+                    });
+
+                   
+
+                    // handle click event   
+                    google.maps.event.addListener(marker, 'click', function() {
+                        infowindow.setContent(this.info);
+                        infowindow.open(map, this);
+
+                        // zoom map
+                        //map.setZoom(15);
+                        //map.setCenter(this.getPosition());
+                    });
+                }
+>>>>>>> d3738d750494c635d20ebe27419a1bcbf3aca3f2
 
                 
                 // get your current location using HTML5 Geolocation
