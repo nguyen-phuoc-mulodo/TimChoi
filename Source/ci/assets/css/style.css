@@ -121,7 +121,6 @@ a[href^="http://maps.google.com/maps"]{display:none !important}
 	top: 4px; left: 4px;
 }
 
-<<<<<<< HEAD
 .marker-hover {
 	background: #252525;
 	color: white;
@@ -152,8 +151,4 @@ a[href^="http://maps.google.com/maps"]{display:none !important}
 .user-avatar {
     margin: 0 0 0 75px;
 }
-=======
-img[src*="close.gif"] {
-	display: none;
-}
->>>>>>> d3738d750494c635d20ebe27419a1bcbf3aca3f2
+
