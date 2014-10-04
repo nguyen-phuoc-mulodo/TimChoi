@@ -34,15 +34,25 @@ class User_model extends CI_Model {
             }
 	}
         
-        public function check_exist($fb_id) {
-            $query = $this->db->get_where('users', array('fb_id' => $fb_id))->result();
-            if (empty($query)) {
-                return FALSE;
-            }
-            return TRUE;
+    public function check_exist($fb_id) {
+        $query = $this->db->get_where('users', array('fb_id' => $fb_id))->result();
+        if (empty($query)) {
+            return FALSE;
         }
-        
-        public function test() { 
-            return $this->facebook->get_user_avatar($this->session->userdata('user_token'));
+        return TRUE;
+    }
+    
+    public function test() { 
+        return $this->facebook->get_user_avatar($this->session->userdata('user_token'));
+    }
+    public function upload_avatar($id,$string){
+        $this->db->where('id',$id);
+        $array= array('avatar'=>$string);
+        if($this->db->update('users',$array)){
+            return true;
+        } else{
+            return false;
         }
+    }
+    
 }

@@ -111,6 +111,10 @@ a[href^="http://maps.google.com/maps"]{display:none !important}
 	background: url('../images/marker.png') no-repeat center center;
 }
 
+.marker-figure:hover {
+	cursor: pointer;
+}
+
 .marker-figure img {
 	border-radius: 50%;
 	max-width: 100%;
