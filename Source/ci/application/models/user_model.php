@@ -45,5 +45,14 @@ class User_model extends CI_Model {
     public function test() { 
         return $this->facebook->get_user_avatar($this->session->userdata('user_token'));
     }
+    public function upload_avatar($id,$string){
+        $this->db->where('id',$id);
+        $array= array('avatar'=>$string);
+        if($this->db->update('users',$array)){
+            return true;
+        } else{
+            return false;
+        }
+    }
     
 }

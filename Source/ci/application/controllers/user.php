@@ -194,19 +194,30 @@ class User extends GB_Controller {
     }
     // @ do upload image
     function do_upload(){
-        $config['upload_path']='C:\wamp\www\timchoi\uploads';
+        $config['upload_path']=FCPATH.'/uploads';
         $config['allowed_types']='gif|jpg|png';
         $config['max_size']='10000';
         $config['max_height']='1024';
         $config['max_width']='768';
 
         $this->load->library('upload',$config);
+        $this->load->model('User_model');
 
         if($this->upload->do_upload()==false){
             $error=array('error'=>$this->upload->display_errors());
             $this->load->view('upload/upload_image',$error);
         } else{
-            $data=array('upload_data'=>$this->upload->data());
+            $data=$this->upload->data();
+
+            $string =$config['upload_path'].$data['file_name'];
+            $id=1;// set id in here
+            var_dump($string);
+            if($this->User_model->upload_avatar($id,$string)){
+                echo "update avatar success";
+            } else {
+                echo "update avatar failed";
+            }
+            //insert database
             echo "<pre>";
             var_dump($data);
             echo "</pre>";
