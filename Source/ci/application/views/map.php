@@ -28,7 +28,7 @@
         $.getJSON( locationAPI, {
             format: "json"
         }).done(function(data) {
-            var locations = jQuery.parseJSON(data);
+            var locations = data;
         
             function initialize(locations) {
                 var mapOptions = {
