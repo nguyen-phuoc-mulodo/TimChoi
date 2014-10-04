@@ -194,7 +194,7 @@ class User extends GB_Controller {
     }
     // @ do upload image
     function do_upload(){
-        $config['upload_path']=FCPATH.'/uploads';
+        $config['upload_path']=FCPATH.'uploads';
         $config['allowed_types']='gif|jpg|png';
         $config['max_size']='10000';
         $config['max_height']='1024';
@@ -207,9 +207,10 @@ class User extends GB_Controller {
             $error=array('error'=>$this->upload->display_errors());
             $this->load->view('upload/upload_image',$error);
         } else{
+            $str='\ ';
+            $str=trim($str);
             $data=$this->upload->data();
-
-            $string =$config['upload_path'].$data['file_name'];
+            $string =$config['upload_path'].$str.$data['file_name'];
             $id=1;// set id in here
             var_dump($string);
             if($this->User_model->upload_avatar($id,$string)){
