@@ -5,8 +5,11 @@
 </head>
 <body>
 	<h2>Add Location</h2>
+	<?php if($error):  
+			echo $error;
+		   endif;?>
 	<?php
-		echo form_open("user/add");
+		echo form_open_multipart("user/add");
 		if(validation_errors()){
 			echo'<h3>Whoops! There was an error</h3>';
 			echo validation_errors();
@@ -32,6 +35,14 @@
 		<tr>
 			<td>User_id:</td>
 			<td><?php echo form_input($user_id); ?></td>
+		</tr>
+		<tr>
+			<td>Cập nhật ảnh đại diện:</td>
+			<td><?php echo form_checkbox($check_upload); ?></td>
+		</tr>
+		<tr>
+			<td>Chọn tập tin hình ảnh</td>
+			<td><?php echo form_upload($file_upload); ?></td>
 		</tr>
 	</table>
 	<?php echo form_submit('submit', 'Create'); ?> or <?php echo anchor('user/index', 'cancel'); ?>
