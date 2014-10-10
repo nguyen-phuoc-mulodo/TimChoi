@@ -149,7 +149,7 @@ class Facebook
         $response = $request->execute();
         $graphObject = $response->getGraphObject()->asArray();
         
-        return $graphObject->url;
+        return $graphObject['url'];
         
     }
 
