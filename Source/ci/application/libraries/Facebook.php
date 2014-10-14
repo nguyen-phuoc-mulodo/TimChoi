@@ -21,6 +21,7 @@ class Facebook
     public function __construct() {
         
         FacebookSession::setDefaultApplication('695082060564419', '093b0b371673a8b831dcc87d62fee7b0' );
+        
         $this->helper = new FacebookRedirectLoginHelper('http://localhost/timchoi/index.php/login');
     }
     
