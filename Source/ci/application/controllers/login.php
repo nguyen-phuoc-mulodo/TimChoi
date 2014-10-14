@@ -26,7 +26,7 @@ class Login extends CI_Controller {
     }
     
     public function index() {
-        $helper = new FacebookRedirectLoginHelper('http://localhost/timchoi/index.php/login/');
+        $helper = new FacebookRedirectLoginHelper($this->config->item('loginurl'));
         try {
             $session = $helper->getSessionFromRedirect();
         } catch(FacebookRequestException $ex) {
