@@ -189,97 +189,37 @@ class User extends GB_Controller {
         $data['data']=$this->Location_model->view_locations();
         $this->load->view('view_all_locations',$data);
     }
-    // @ check friend
-    public function check_friend(){
-        $this->load->helper('url');
-        $this->load->helper('form');
-        $this->load->model('User_model');
-
-        //load support assets
-        $this->load->library("form_validation");
-        $this->form_validation->set_error_delimiters('<div class="error">','</div>');
-
-        // set validation rules
-        $this->form_validation->set_rules('user1','Username 1','required|integer');
-        $this->form_validation->set_rules('user2', 'Username 2', 'required|integer');
-        //begin validation
-        if($this->form_validation->run()==FALSE){
-            //first load, or problem with form
-            $data['user1'] = array('name' => 'user1', 
-                                    'id' => 'user1', 
-                                    'value' => set_value('user1', ''), 
-                                    'maxlength' => '100', 
-                                    'size' => '40');
-            $data['user2'] = array('name' => 'user2', 
-                                        'id' => 'user2', 
-                                        'value' => set_value('user2', ''), 
-                                        'maxlength' => '100', 
-                                        'size' => '40');
-            $this->load->view('add_friend',$data);
-
-        }else{ //validation passed, add to database
-            $this->load->model('Friend_model');
-            $user1=$this->input->post('user1');
-            $user2=$this->input->post('user2');
-            if($this->Friend_model->check_friend($user1,$user2)==true){
-                echo "Đã là bạn của nhau, xin đừng unfriend";
-            } else{
-                echo "add friend e nhe";
-            }
-        }   
-    }
     // @ add friend
     public function add_friend(){
         $this->load->helper('url');
         $this->load->helper('form');
         $this->load->model('User_model');
-
-        //load support assets
-        $this->load->library("form_validation");
-        $this->form_validation->set_error_delimiters('<div class="error">','</div>');
-
-        // set validation rules
-        $this->form_validation->set_rules('user1','Username 1','required|integer');
-        $this->form_validation->set_rules('user2', 'Username 2', 'required|integer');
-        //begin validation
-        if($this->form_validation->run()==FALSE){
-            //first load, or problem with form
-            $data['user1'] = array('name' => 'user1', 
-                                    'id' => 'user1', 
-                                    'value' => set_value('user1', ''), 
-                                    'maxlength' => '100', 
-                                    'size' => '40');
-            $data['user2'] = array('name' => 'user2', 
-                                        'id' => 'user2', 
-                                        'value' => set_value('user2', ''), 
-                                        'maxlength' => '100', 
-                                        'size' => '40');
-            $this->load->view('add_friend',$data);
-
-        }else{ //validation passed, add to database
-            $this->load->model('Friend_model');
-            $user1=$this->input->post('user1');
-            $user2=$this->input->post('user2');
-            if($this->Friend_model->add_friend($user1,$user2)){
-                echo"Add friend thành công";
-            } else{
-                echo "add friend thất bại";
-            }
-        }   
+        // 
     }
     // @ accept friend
     public function accept_friend(){
-
+        
     }
     // @ function unfriend
     public function unfriend(){
-
+        
     }
     // @ view all friend
     public function view_all_friend(){
         // friend to unfriend
         // list accept friend
 
+    }
+    // @ view all user not friend
+    public function show_suggest_friend(){
+        $this->load->helper('url');
+        $this->load->helper('form');
+        $this->load->model('User_model');
+        //set id in here
+        $id='1';
+        // show list friend
+        $data['$data']=Friend_model->view_suggest_friend($id);
+        $this->load->view('friend/show_suggest_friend',$data);
     }
     // @upload image
     public function upload(){
