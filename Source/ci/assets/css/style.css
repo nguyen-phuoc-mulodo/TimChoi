@@ -84,31 +84,17 @@ a[href^="http://maps.google.com/maps"]{display:none !important}
 	line-height: 19px;
 }
 
-#infoWindowWrapper {
-	/*padding: 10px;
-	width: 250px;
-	background: #252525;
-	color: white;
-	border-radius: 45px;
-	overflow: hidden;
-	box-shadow: 1px 1px 0px black, 2px 2px 0px black, 3px 3px 0px black;*/
-}
-
-#firstHeading {
-	font-size: 18px;
-	margin-bottom: 10px;
-}
-
-#bodyContent {
-	display: none;
+.marker.z-index {
+	z-index: 999999;
 }
 
 .marker-figure {
 	width: 74px;
-	height: 88px;
+	height: 92px;
 	float: left;
 	position: relative;
 	background: url('../images/marker.png') no-repeat center center;
+	z-index: 2;
 }
 
 .marker-figure:hover {
@@ -133,7 +119,6 @@ a[href^="http://maps.google.com/maps"]{display:none !important}
 	border-radius: 50px;
 	box-sizing: border-box;
 	padding: 8px 20px 8px 80px;
-
 	visibility: hidden;
 	opacity: 0;
 
@@ -143,7 +128,8 @@ a[href^="http://maps.google.com/maps"]{display:none !important}
 }
 
 .marker-hover .title {
-	font-size: 18px;
+	font-size: 17px;
+	font-weight: 700;
 	margin: 0;
 }
 

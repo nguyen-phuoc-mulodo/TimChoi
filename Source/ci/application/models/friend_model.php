@@ -74,4 +74,14 @@ class Friend_model extends CI_Model{
         $query=$this->db->query($sql,array($id_user));
         return $query->result_array();
     }
+    // @View suggest friend
+    public function view_suggest_friend($id){
+        $sql="select * from users u where u.id not in( 
+                                                        select f.user2 
+                                                        from friend f 
+                                                        where f.user1=?) and u.id!=?";
+        $query=$this->db->query($sql,array($id,$id));
+        return $query->result_array();
+        
+    }
 }
